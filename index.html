@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartão de Amor</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fdeeff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .container {
+    text-align: center;
+    color: #333;
+  }
+
+  h1 {
+    color: red;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  .heart-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: moveHeart 10s linear infinite, rotateHeart 1s linear infinite, floatHeart 3s ease-in-out infinite;
+  }
+
+  .heart::before {
+    content: '❤️';
+    font-size: 50px;
+    color: red;
+  }
+  .outro{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: moveHeart 10s linear infinite, rotateHeart 1s linear infinite, floatHeart 3s ease-in-out infinite;
+  }
+  .outro::eu {
+    content: '👍🏼';
+    font-size: 50px;
+    color: red;
+  }
+
+  @keyframes moveHeart {
+    0% {
+      bottom: -50px;
+      opacity: 1;
+    }
+    100% {
+      bottom: 100vh;
+      opacity: 0;
+    }
+  }
+
+  @keyframes rotateHeart {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes floatHeart {
+    0%, 100% {
+      transform: translateY(0) rotateZ(0deg);
+    }
+    25% {
+      transform: translateY(-30px) rotateZ(10deg);
+    }
+    50% {
+      transform: translateY(0) rotateZ(0deg);
+    }
+    75% {
+      transform: translateY(-15px) rotateZ(-10deg);
+    }
+    100% {
+      transform: translateY(0) rotateZ(0deg);
+    }
+  }
+
+  .voucher-container {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .voucher-container.show {
+    opacity: 1;
+  }
+
+  .voucher {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .voucher:before,
+  .voucher:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+  }
+
+  .voucher:before {
+    top: -5px;
+  }
+
+  .voucher:after {
+    bottom: -5px;
+  }
+
+  h2 {
+    color: red;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: red;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #999;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Dois reais ou um presente misterioso</h1>
+  <div class="options">
+    <button id="btn-1" class="button" onclick="showThumbsUp()">Dois reais</button>
+    <button id="btn-2" class="button" onclick="showGift()">Presente misterioso</button>
+  </div>
+  <p id="choice-msg"></p>
+  <div class="heart-container" id="heart-container"></div>
+  <div id="voucher" class="voucher-container">
+    <div class="voucher">
+      <h2>Vale Beijos e Abraços</h2>
+      <p>Este vale dá direito a beijos e abraços ilimitados! Aproveite!</p>
+      <div class="footer">Válido até: 31 de fevereiro</div>
+    </div>
+  </div>
+</div>
+<script>
+  function showGift() {
+    const heartContainer = document.getElementById('heart-container');
+    const voucher = document.getElementById('voucher');
+    heartContainer.innerHTML = ''; // Limpar corações anteriores
+
+    // Criar 10 corações e adicioná-los ao contêiner  
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 90 + '%'; // Posição horizontal aleatória
+      heart.style.top = Math.random() * 90 + '%'; // Posição vertical aleatória
+      heart.style.animationDelay = Math.random() * 10 + 's'; // Atraso da animação aleatória
+      heartContainer.appendChild(heart);
+    }
+
+    voucher.classList.add('show'); // Adicionar classe para mostrar o vale
+  }
+
+  function showThumbsUp() {
+    const heartContainer = document.getElementById('heart-container');
+    heartContainer.innerHTML = ''; // Limpar corações anteriores
+
+    // Criar 10 joinhas e adicioná-los ao contêiner
+    for (let i = 0; i < 10; i++) {
+      const thumbsUp = document.createElement('div');
+      thumbsUp.className = 'thumbs-up-animation'; // Adicionar classe da animação
+      thumbsUp.className = 'eu';
+      thumbsUp.style.left = Math.random() * 90 + '%'; // Posição horizontal aleatória
+      thumbsUp.style.top = Math.random() * 90 + '%'; // Posição vertical aleatória
+      thumbsUp.style.animationDelay = Math.random() * 10 + 's'; // Atraso da animação aleatória
+      heartContainer.appendChild(thumbsUp);
+    }
+  }
+</script>
+</body>
+</html>
